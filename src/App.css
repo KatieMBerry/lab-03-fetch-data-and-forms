@@ -7,3 +7,29 @@ body {
   color: aqua;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 30px;
+}
+.poke-article {
+  background-color: black;
+  width: 300px;
+  padding: 20px;
+  /* display: flex;
+  flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: pink solid 5px;
+  float: left;
+}
+
+.poke-image {
+  height: 100px;
+  margin: 10px;
+  float: right;
+}
+
