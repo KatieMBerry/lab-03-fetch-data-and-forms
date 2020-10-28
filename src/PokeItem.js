@@ -6,9 +6,9 @@ export default class PokeItem extends Component {
         return (
 
             <div className="poke-article">
-                <div>{this.props.title}</div>
+                <h1>{this.props.title}</h1>
                 <img src={this.props.image} className="poke-image" alt="pokemon" />
-                <div>{this.props.hiddenAbility}</div>
+                <div>This {this.props.title}'s hidden ability is: {this.props.hiddenAbility}</div>
             </div>
 
         )
