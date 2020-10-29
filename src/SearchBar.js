@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 export default class SearchBar extends Component {
     render() {
+
         return (
             <div className="search-div">
                 <input onChange={this.props.handleChange}
@@ -12,6 +13,7 @@ export default class SearchBar extends Component {
                 <button onClick={this.props.handleClick}
                     filter={this.props.filter}
                     className="search-button">Submit</button>
+                <div></div>
             </div>
         )
     }
