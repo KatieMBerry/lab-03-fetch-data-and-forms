@@ -10,6 +10,7 @@ export default class SearchBar extends Component {
                     placeholder="Search for a Pokemon!" />
 
                 <button onClick={this.props.handleClick}
+                    filter={this.props.filter}
                     className="search-button">Submit</button>
             </div>
         )
