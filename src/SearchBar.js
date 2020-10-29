@@ -4,8 +4,8 @@ export default class SearchBar extends Component {
     render() {
         return (
             <div className="search-div">
-                <input className="search-bar" placeholder="Search for a Hidden Ability!"></input>
-                <button className="search-button">Click to Search!</button>
+                {/* <input value={this.props.input} className="search-bar" placeholder="Search for a Pokemon!" />
+                <button onClick={this.props.handleClick} className="search-button">Search</button> */}
             </div>
         )
     }
