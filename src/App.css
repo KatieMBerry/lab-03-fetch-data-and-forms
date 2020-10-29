@@ -33,3 +33,16 @@ body {
   float: right;
 }
 
+.search-bar {
+  height: 30px;
+  background-color: pink;
+  color: black;
+  font-size: 20px;
+}
+
+.search-div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
