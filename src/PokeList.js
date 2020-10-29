@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PokeItem from './PokeItem.js';
 
+
 export default class PokeList extends Component {
 
 
@@ -9,12 +10,12 @@ export default class PokeList extends Component {
             //if no input, show all
             if (!this.props.filter) return true;
             //if input, show it - tracking state of what chose in filter
-            if (poke.input === this.props.filter) return true;
+            if (poke.pokemon === this.props.filter) return true;
             //else don't include in the array
             return false
         });
-
-
+        //currently giving me all the pokemon
+        console.log(inputPoke);
         return (
             <div className="poke-article">
                 {

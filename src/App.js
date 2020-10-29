@@ -1,41 +1,48 @@
-import React from 'react';
+import React from "react";
 import './App.css';
+import HomePage from './HomePage.js';
 import Header from './Header.js';
-import PokeList from './PokeList.js';
-import pokeData from './data.js';
-import SearchBar from './SearchBar.js';
+import PokePage from './PokePage.js';
+import FetchPage from './FetchPage.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
+// Params are placeholders in the URL that begin
+// with a colon, like the `:id` param defined in
+// the route in this example. A similar convention
+// is used for matching dynamic segments in other
+// popular web frameworks like Rails and Express.
 
-// 1) move input state to App.js
-// 2) give SearchBar the handleChange to change App.js state
-// 3) give pokeList the filter (since it's the component that needs it)
 export default class App extends React.Component {
-  state = {
-    input: '',
-    filter: ''
-  }
-
-  handleChange = e => {//tracks the state of the input
-    this.setState({ input: e.target.value });
-  }
-
-  handleClick = e => {
-    this.setState({ filter: e.target.value })
-  }
-
   render() {
     return (
       <div>
-        <Header />
-        <SearchBar handleChange={this.handleChange}
-          input={this.state.input}
-          handleClick={this.handleClick} />
-
-        <PokeList pokeData={pokeData}
-          filter={this.state.filter}
-          handleClick={this.handleClick} />
+        <Router>
+          <Header />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(routerProps) => <HomePage {...routerProps} />}
+            />
+            <Route
+              path="/list"
+              exact
+              render={(routerProps) => <PokePage {...routerProps} />}
+            />
+            <Route
+              path="/fetch"
+              exact
+              render={(routerProps) => <FetchPage {...routerProps} />}
+            />
+          </Switch>
+        </Router>
       </div>
     )
   }
 }
+
 
