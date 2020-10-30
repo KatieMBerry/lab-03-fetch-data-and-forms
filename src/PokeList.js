@@ -23,9 +23,11 @@ export default class PokeList extends Component {
             })
 
             .sort((a, b) => {
-                if (this.props.orderFilter === 'Ascending') return a - b;
-                if (this.props.orderFilter === 'Descending') return b - a;
-                return false;
+                if (this.props.order === 'descending') {
+                    return b.pokemon.localeCompare(a.pokemon);
+                } else {
+                    return a.pokemon.localeCompare(b.pokemon);
+                }
             });
 
 
