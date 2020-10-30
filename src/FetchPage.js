@@ -8,7 +8,7 @@ export default class FetchPage extends Component {
     componentDidMount = async () => {
         console.log(Date.now())//when mounted
         //fetch can be called request
-        const response = await fetch.get('http://futuramaapi.herokuapp.com/api/quotes');//make request or "fetch"
+        const response = await fetch.get('http:// https://alchemy-pokedex.herokuapp.com');//make request or "fetch"
 
         console.log(Date.now())//how long since mount
         console.log(response.body)//JSON data
