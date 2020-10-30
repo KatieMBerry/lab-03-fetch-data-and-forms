@@ -6,16 +6,29 @@ export default class PokeList extends Component {
 
 
     render() {
-        const inputPoke = this.props.pokeData.filter((poke) => {
-            //if no input, show all
-            if (!this.props.filter) return true;
-            //if input, show it - tracking state of what chose in filter
-            if (poke.pokemon === this.props.filter) return true;
-            //else don't include in the array
-            return false
-        });
-        //currently giving me all the pokemon
-        console.log(inputPoke);
+        const inputPoke = this.props.pokeData
+            .filter((poke) => {
+                //if no input, show all
+                if (!this.props.filter) return true;
+                //if input, show it - tracking state of what chose in filter
+                if (poke.pokemon === this.props.filter) return true;
+                //else don't include in the array
+                return false
+            })
+
+            .filter((poke) => {
+                if (!this.props.hiddenAbility) return true;
+                if (poke.ability_hidden === this.props.hiddenAbility) return true;
+                return false;
+            })
+
+            .sort((a, b) => {
+                if (this.props.orderFilter === 'Ascending') return a - b;
+                if (this.props.orderFilter === 'Descending') return b - a;
+                return false;
+            });
+
+
         return (
             <div className="poke-article">
                 {
@@ -24,7 +37,10 @@ export default class PokeList extends Component {
                         <PokeItem
                             title={poke.pokemon}
                             image={poke.url_image}
-                            hiddenAbility={poke.ability_hidden} />)
+                            hiddenAbility={poke.ability_hidden}
+                            type={poke.type_1}
+                            attack={poke.attack}
+                            defense={poke.defense} />)
                 }
             </div>
         )
