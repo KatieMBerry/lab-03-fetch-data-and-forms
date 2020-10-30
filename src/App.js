@@ -3,7 +3,7 @@ import './App.css';
 import HomePage from './HomePage.js';
 import Header from './Header.js';
 import PokePage from './PokePage.js';
-import FetchPage from './FetchPage.js';
+import ListPage from './ListPage.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,7 +36,7 @@ export default class App extends React.Component {
             <Route
               path="/fetch"
               exact
-              render={(routerProps) => <FetchPage {...routerProps} />}
+              render={(routerProps) => <ListPage {...routerProps} />}
             />
           </Switch>
         </Router>

@@ -18,8 +18,8 @@ export default class Sort extends Component {
                     </select>
 
                     <select className="order" onChange={this.props.handleChangeOrder}>
-                        <option value="ascending">Ascending</option>
-                        <option value="descending">Descending</option>
+                        <option value="ascending">ascending</option>
+                        <option value="descending">descending</option>
                     </select>
                 </div>
             </>
