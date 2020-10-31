@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fetch from 'superagent';
+
 
 const sleep = (time) => new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -7,19 +7,19 @@ const sleep = (time) => new Promise((resolve, reject) => {
     }, time)
 });
 
-export default class FetchPage extends Component {
+export default class ListPage extends Component {
     state = {
         type: []
     }
     componentDidMount = async () => {
         // console.log(Date.now())//when mounted
         //fetch can be called request
-        const response = await fetch.get('https://alchemy-pokedex.herokuapp.com/api/pokedex/types');//make request or "fetch"
+        const response = await fetch.get('https://alchemy-pokedex.herokuapp.com/api/pokedex');//make request or "fetch"
 
         // console.log(Date.now())//how long since mount
         // console.log(response.body)//JSON data
         await sleep(2000)
-        this.setState({ type: response.body });//set the state;will need access to it to to render
+        this.setState({ type: response.body.results });//set the state;will need access to it to to render
     }
 
     render() {

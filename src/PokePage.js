@@ -1,32 +1,52 @@
 import React from 'react';
 import PokeList from './PokeList.js';
-import pokeData from './data.js';
+// import pokeData from './data.js';
 import SearchBar from './SearchBar.js';
 import Sort from './Sort.js';
+import request from 'superagent';
 
 export default class PokePage extends React.Component {
     state = {
         input: '',
         searchFilter: '',
-        hiddenAbility: '',
-        order: ''
+        category: '',
+        order: '',
+        fetchedData: []
+    }
+    componentDidMount = async () => {
+
+        await this.fetchPoke();
     }
 
-    handleChange = e => {//tracks the state of the search input
+    fetchPoke = async () => {
+        const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.searchFilter}`);
+        this.setState({ fetchedData: response.body.results });
+    }
+
+    fetchSortedPoke = async () => {
+        const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=${this.state.category}&direction=${this.state.order}`);
+        this.setState({ fetchedData: response.body.results });
+    }
+
+
+    handleChange = e => {
         this.setState({ input: e.target.value });
     }
 
-    handleClick = e => {//compares the filter to the search input
+    handleClick = e => {
         this.setState({ searchFilter: this.state.input })
     }
 
-    handleChangeHiddenAbility = e => {
-        this.setState({ hiddenAbility: e.target.value });
+    handleChangeCategory = async (e) => {
+        await this.setState({ category: e.target.value });
+        await this.fetchSortedPoke();
     }
 
-    handleChangeOrder = e => {
-        this.setState({ order: e.target.value });
+    handleChangeOrder = async (e) => {
+        await this.setState({ order: e.target.value });
+        await this.fetchSortedPoke();
     }
+
 
     render() {
         return (
@@ -35,12 +55,12 @@ export default class PokePage extends React.Component {
                     handleClick={this.handleClick}
                     input={this.state.input} />
 
-                <Sort handleChangeHiddenAbility={this.handleChangeHiddenAbility}
+                <Sort handleChangeCategory={this.handleChangeCategory}
                     handleChangeOrder={this.handleChangeOrder} />
 
-                <PokeList pokeData={pokeData}
+                <PokeList fetchedData={this.state.fetchedData}
                     filter={this.state.searchFilter}
-                    hiddenAbility={this.state.hiddenAbility}
+                    category={this.state.category}
                     order={this.state.order} />
             </div>
         )

@@ -1,11 +1,12 @@
 body {
-  display: flex;
+  display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
   color: aqua;
 }
+
 
 .header {
   width: 100%;
@@ -18,10 +19,8 @@ body {
   background-color: black;
   width: 300px;
   padding: 20px;
-  /* display: flex;
-  flex-direction: column; */
-  justify-content: center;
-  align-items: center;
+  /* display: grid; */
+  /* grid-template-columns: 150px 1fr; */
   margin: 10px;
   border: pink solid 5px;
   float: left;
