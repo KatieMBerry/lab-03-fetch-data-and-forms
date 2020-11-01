@@ -6,7 +6,7 @@ export default class PokeList extends Component {
 
 
     render() {
-        const inputPoke = this.props.pokeData
+        const inputPoke = this.props.fetchedData
             .filter((poke) => {
                 //if no input, show all
                 if (!this.props.filter) return true;
@@ -31,8 +31,10 @@ export default class PokeList extends Component {
             });
 
 
+
+
         return (
-            <div className="poke-article">
+            <div className="poke-article" >
                 {
                     //use filtered array to map over
                     inputPoke.map(poke =>

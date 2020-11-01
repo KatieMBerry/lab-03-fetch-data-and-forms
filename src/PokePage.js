@@ -1,48 +1,92 @@
 import React from 'react';
-import PokeList from './PokeList.js';
-import pokeData from './data.js';
 import SearchBar from './SearchBar.js';
 import Sort from './Sort.js';
+import request from 'superagent';
+
+const sleep = (time) => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve()
+    }, time)
+});
 
 export default class PokePage extends React.Component {
     state = {
         input: '',
         searchFilter: '',
-        hiddenAbility: '',
-        order: ''
+        category: '',
+        order: '',
+        fetchedData: []
+    }
+    componentDidMount = async () => {
+        await this.fetchPoke();
     }
 
-    handleChange = e => {//tracks the state of the search input
-        this.setState({ input: e.target.value });
+    fetchPoke = async () => {
+        const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.searchFilter}&sort=${this.state.searchFilter}&direction=${this.state.order}`);
+        await sleep(2000)
+        this.setState({ fetchedData: response.body.results });
     }
 
-    handleClick = e => {//compares the filter to the search input
-        this.setState({ searchFilter: this.state.input })
+    fetchSortedPoke = async () => {
+        const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=${this.state.category}&direction=${this.state.order}`);
+        await sleep(2000)
+        this.setState({ fetchedData: response.body.results });
     }
 
-    handleChangeHiddenAbility = e => {
-        this.setState({ hiddenAbility: e.target.value });
+
+    handleChange = async (e) => {
+        await this.setState({ input: e.target.value });
+        await this.fetchPoke();
     }
 
-    handleChangeOrder = e => {
-        this.setState({ order: e.target.value });
+    handleClick = async (e) => {
+        await this.setState({ searchFilter: this.state.input })
+        await this.fetchPoke();
     }
+
+    handleChangeCategory = async (e) => {
+        await this.setState({ category: e.target.value });
+        await this.fetchSortedPoke();
+    }
+
+    handleChangeOrder = async (e) => {
+        await this.setState({ order: e.target.value });
+        await this.fetchSortedPoke();
+    }
+
 
     render() {
-        return (
-            <div className="container">
+        return (<>
+            <div className="search">
                 <SearchBar handleChange={this.handleChange}
                     handleClick={this.handleClick}
-                    input={this.state.input} />
-
-                <Sort handleChangeHiddenAbility={this.handleChangeHiddenAbility}
+                    input={this.state.input}
+                    searchFilter={this.props.searchFilter} />
+                <Sort handleChangeCategory={this.handleChangeCategory}
                     handleChangeOrder={this.handleChangeOrder} />
-
-                <PokeList pokeData={pokeData}
-                    filter={this.state.searchFilter}
-                    hiddenAbility={this.state.hiddenAbility}
-                    order={this.state.order} />
             </div>
+            <div className="fetch">
+                {
+                    this.state.fetchedData.length === 0
+                        ? <iframe
+                            src="https://giphy.com/embed/xTk9ZvMnbIiIew7IpW"
+                            title={Math.random()}
+                            width="480"
+                            height="480"
+                            frameBorder="0"
+                            className="giphy-embed"
+                            allowFullScreen />
+                        : this.state.fetchedData.map(fetchedPoke => <div
+                            key={fetchedPoke.pokemon}>
+                            <div className="poke-card">
+                                <h2> {fetchedPoke.pokemon}</h2>
+                                <img src={fetchedPoke.url_image} alt={fetchedPoke.pokemon} width="100" height="100" />
+                                <div>Type: {fetchedPoke.type_1}</div>
+                                <div>Attack: {fetchedPoke.attack}</div>
+                                <div>Defense: {fetchedPoke.defense}</div></div>
+                        </div>)
+                }
+            </div></>
         )
     }
 }

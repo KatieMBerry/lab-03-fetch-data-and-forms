@@ -13,9 +13,7 @@ export default class Header extends Component {
                     <li>
                         <Link to="/list">PokePage</Link>
                     </li>
-                    <li>
-                        <Link to="/fetch">FetchPage</Link>
-                    </li>
+
                 </ul>
             </div>
 

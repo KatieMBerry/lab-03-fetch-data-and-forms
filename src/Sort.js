@@ -5,21 +5,18 @@ export default class Sort extends Component {
     render() {
         return (
             <>
-                <div>
-                    <select className="category" onChange={this.props.handleChangeHiddenAbility}>
-                        <option value="">Show All </option>
-                        <option value="chlorophyll">Chlorophyll</option>
-                        <option value="solar-power">Solar Power</option>
-                        <option value="rain-dish">Rain Dish</option>
-                        <option value="run-away">Run Away</option>
-                        <option value="sniper">Sniper</option>
-                        <option value="big-pecks">Big Pecks</option>
-                        <option value="n-a">NA</option>
+                <div className="search-div">
+                    <select className="category" onChange={this.props.handleChangeCategory}>
+                        <option value="pokemon">Show All </option>
+                        <option value="attack">Attack</option>
+                        <option value="defense">Defense</option>
+                        <option value="type_1">Type</option>
+
                     </select>
 
                     <select className="order" onChange={this.props.handleChangeOrder}>
-                        <option value="ascending">ascending</option>
-                        <option value="descending">descending</option>
+                        <option value="asc">ascending</option>
+                        <option value="desc">descending</option>
                     </select>
                 </div>
             </>
