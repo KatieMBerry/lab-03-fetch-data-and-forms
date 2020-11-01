@@ -3,6 +3,12 @@ import SearchBar from './SearchBar.js';
 import Sort from './Sort.js';
 import request from 'superagent';
 
+const sleep = (time) => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve()
+    }, time)
+});
+
 export default class PokePage extends React.Component {
     state = {
         input: '',
@@ -17,11 +23,13 @@ export default class PokePage extends React.Component {
 
     fetchPoke = async () => {
         const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.searchFilter}&sort=${this.state.searchFilter}&direction=${this.state.order}`);
+        await sleep(2000)
         this.setState({ fetchedData: response.body.results });
     }
 
     fetchSortedPoke = async () => {
         const response = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=${this.state.category}&direction=${this.state.order}`);
+        await sleep(2000)
         this.setState({ fetchedData: response.body.results });
     }
 
@@ -60,7 +68,14 @@ export default class PokePage extends React.Component {
             <div className="fetch">
                 {
                     this.state.fetchedData.length === 0
-                        ? "loading"
+                        ? <iframe
+                            src="https://giphy.com/embed/xTk9ZvMnbIiIew7IpW"
+                            title={Math.random()}
+                            width="480"
+                            height="480"
+                            frameBorder="0"
+                            className="giphy-embed"
+                            allowFullScreen />
                         : this.state.fetchedData.map(fetchedPoke => <div
                             key={fetchedPoke.pokemon}>
                             <div className="poke-card">
@@ -71,7 +86,6 @@ export default class PokePage extends React.Component {
                                 <div>Defense: {fetchedPoke.defense}</div></div>
                         </div>)
                 }
-
             </div></>
         )
     }
