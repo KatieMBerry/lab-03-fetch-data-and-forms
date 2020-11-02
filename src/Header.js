@@ -13,7 +13,9 @@ export default class Header extends Component {
                     <li>
                         <Link to="/list">PokePage</Link>
                     </li>
-
+                    <li>
+                        <Link to="/pagination">Pages</Link>
+                    </li>
                 </ul>
             </div>
 
