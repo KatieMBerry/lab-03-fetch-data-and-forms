@@ -4,6 +4,7 @@ import HomePage from './HomePage.js';
 import Header from './Header.js';
 import PokePage from './PokePage.js';
 import DetailPage from './DetailPage.js';
+import PaginationPage from './PaginationPage.js';
 
 import {
   BrowserRouter as Router,
@@ -32,6 +33,11 @@ export default class App extends React.Component {
               path="/pokemon/:name"
               exact
               render={(routerProps) => <DetailPage {...routerProps} />}
+            />
+            <Route
+              path="/pagination"
+              exact
+              render={(routerProps) => <PaginationPage {...routerProps} />}
             />
           </Switch>
         </Router>

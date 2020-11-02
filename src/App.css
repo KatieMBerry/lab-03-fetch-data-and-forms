@@ -8,6 +8,19 @@ body {
   align-items: center;
 }
 
+@media (max-width: 600px) {
+  .fetch {
+    background: orange;
+  }
+}
+
+
+@media (min-width: 900px) {
+  .fetch {
+    background:lightblue;
+  }
+}
+
 .header {
   width: 100%;
   font-size: 30px;
@@ -21,6 +34,7 @@ ul {
   list-style: none;
 
 }
+
 
 .fetch {
   background-color: black;
@@ -41,6 +55,12 @@ ul {
   margin: 10px;
   border: solid purple 1px;
   align-content: center;
+  justify-content: center;
+}
+
+.paged-poke {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
