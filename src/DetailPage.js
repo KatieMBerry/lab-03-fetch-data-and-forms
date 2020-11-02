@@ -11,6 +11,7 @@ export default class DetailPage extends React.Component {
         this.setState({ fetchedData: response.body.results });
     }
 
+
     render() {
         return (<>
             <div className="fetch">
@@ -26,7 +27,7 @@ export default class DetailPage extends React.Component {
                             className="giphy-embed"
                             allowFullScreen />
                         : this.state.fetchedData.map(fetchedPoke => <div
-                            key={fetchedPoke.pokemon}>
+                            key={fetchedPoke.pokemon} >
                             <div className="poke-card">
                                 <h2> {fetchedPoke.pokemon}</h2>
                                 <img src={fetchedPoke.url_image} alt={fetchedPoke.pokemon} width="100" height="100" />

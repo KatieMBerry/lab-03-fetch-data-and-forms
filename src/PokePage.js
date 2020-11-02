@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar.js';
 import Sort from './Sort.js';
 import request from 'superagent';
+import { Link } from 'react-router-dom';
 
 export default class PokePage extends React.Component {
     state = {
@@ -69,15 +70,17 @@ export default class PokePage extends React.Component {
                             frameBorder="0"
                             className="giphy-embed"
                             allowFullScreen />
-                        : this.state.fetchedData.map(fetchedPoke => <div
-                            key={fetchedPoke.pokemon}>
-                            <div className="poke-card">
-                                <h2> {fetchedPoke.pokemon}</h2>
-                                <img src={fetchedPoke.url_image} alt={fetchedPoke.pokemon} width="100" height="100" />
-                                <div>Type: {fetchedPoke.type_1}</div>
-                                <div>Attack: {fetchedPoke.attack}</div>
-                                <div>Defense: {fetchedPoke.defense}</div></div>
-                        </div>)
+                        : this.state.fetchedData.map(fetchedPoke =>
+                            <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to={`/pokemon/${fetchedPoke.pokemon}`}>
+                                <div key={fetchedPoke.pokemon} >
+                                    <div className="poke-card">
+                                        <h2> {fetchedPoke.pokemon}</h2>
+                                        <img src={fetchedPoke.url_image} alt={fetchedPoke.pokemon} width="100" height="100" />
+                                        <div>Type: {fetchedPoke.type_1}</div>
+                                        <div>Attack: {fetchedPoke.attack}</div>
+                                        <div>Defense: {fetchedPoke.defense}</div></div>
+                                </div>
+                            </Link>)
                 }
             </div></>
         )
